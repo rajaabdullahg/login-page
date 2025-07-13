@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        /* Your original styles here */
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
         
         * {
@@ -253,151 +254,124 @@
             100% { top: 100%; }
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 640px) {
+        /* Responsive additions (new styles only) */
+        @media (max-width: 768px) {
             .hacker-container {
                 border-width: 1px;
-                box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+                margin: 1rem;
             }
             
             .hacker-toggle {
                 flex-direction: column;
-                gap: 4px;
-                padding: 4px;
+                gap: 0.5rem;
+                padding: 0.5rem;
             }
             
             .hacker-toggle button {
                 width: 100%;
-                padding: 8px;
             }
             
             .grid-cols-2 {
                 grid-template-columns: 1fr;
-                gap: 12px;
+                gap: 1rem;
             }
             
             .hacker-header {
                 font-size: 1.5rem;
             }
-            
-            .hacker-input {
-                padding: 10px 12px;
-                font-size: 14px;
-            }
-            
-            .hacker-btn {
-                padding: 12px;
-                font-size: 14px;
-            }
-            
-            .social-btn {
-                padding: 10px;
-                font-size: 13px;
-            }
-            
-            .terminal-text {
-                font-size: 14px;
-            }
-            
-            .matrix-char {
-                font-size: 12px;
-            }
         }
 
-        @media (max-width: 400px) {
+        @media (max-width: 480px) {
             .hacker-header {
                 font-size: 1.3rem;
             }
             
-            .hacker-toggle button {
-                font-size: 12px;
-            }
-            
             .hacker-input {
-                padding: 8px 10px;
+                padding: 0.75rem;
             }
             
             .hacker-btn {
-                padding: 10px;
+                padding: 0.75rem;
             }
         }
     </style>
 </head>
 <body class="hacker-bg min-h-screen flex items-center justify-center p-4 relative">
+    <!-- Your original HTML here -->
     <!-- Matrix Rain Effect -->
     <div class="matrix-rain" id="matrixRain"></div>
     
     <!-- Scan Line Effect -->
     <div class="scan-line"></div>
     
-    <div class="w-full max-w-md min-h-[500px] md:min-h-[600px] relative z-10 mx-2">
+    <div class="max-w-md w-full min-h-[600px] relative z-10">
         <!-- Main Container -->
-        <div class="hacker-container rounded-xl md:rounded-2xl overflow-hidden">
+        <div class="hacker-container rounded-2xl overflow-hidden">
             <!-- Header with Toggle -->
-            <div class="bg-gradient-to-r from-black to-gray-900 p-6 md:p-8 text-center relative">
+            <div class="bg-gradient-to-r from-black to-gray-900 p-8 text-center relative">
                 <div class="scan-line"></div>
-                <h1 class="text-2xl md:text-3xl font-bold hacker-header mb-2 terminal-text" id="title">SYSTEM_ACCESS</h1>
-                <p class="text-green-400 terminal-text text-sm md:text-base" id="subtitle">> Enter credentials to proceed...</p>
+                <h1 class="text-3xl font-bold hacker-header mb-2 terminal-text" id="title">SYSTEM_ACCESS</h1>
+                <p class="text-green-400 terminal-text" id="subtitle">> Enter credentials to proceed...</p>
                 
                 <!-- Toggle Buttons -->
-                <div class="mt-4 md:mt-6 hacker-toggle rounded-full p-1 flex flex-col sm:flex-row">
-                    <button id="loginToggle" class="flex-1 py-2 px-4 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 hacker-toggle active">
-                        <i class="fas fa-terminal mr-1 sm:mr-2"></i>LOGIN
+                <div class="mt-6 hacker-toggle rounded-full p-1 flex">
+                    <button id="loginToggle" class="flex-1 py-2 px-4 rounded-full text-sm font-medium transition-all duration-300 hacker-toggle active">
+                        <i class="fas fa-terminal mr-2"></i>LOGIN
                     </button>
-                    <button id="signupToggle" class="flex-1 py-2 px-4 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 hacker-toggle">
-                        <i class="fas fa-user-plus mr-1 sm:mr-2"></i>REGISTER
+                    <button id="signupToggle" class="flex-1 py-2 px-4 rounded-full text-sm font-medium transition-all duration-300 hacker-toggle">
+                        <i class="fas fa-user-plus mr-2"></i>REGISTER
                     </button>
                 </div>
             </div>
 
             <!-- Form Container -->
-            <div class="p-4 sm:p-6 md:p-8 bg-black/50">
+            <div class="p-8 bg-black/50">
                 <!-- Login Form -->
                 <form id="loginForm" class="form-container slide-in">
-                    <div class="space-y-4 md:space-y-6">
+                    <div class="space-y-6">
                         <div>
-                            <label class="block text-xs sm:text-sm font-medium text-green-400 mb-1 sm:mb-2 terminal-text">
-                                <i class="fas fa-envelope mr-1 sm:mr-2 text-green-400"></i>EMAIL_ADDRESS
+                            <label class="block text-sm font-medium text-green-400 mb-2 terminal-text">
+                                <i class="fas fa-envelope mr-2 text-green-400"></i>EMAIL_ADDRESS
                             </label>
-                            <input type="email" required class="w-full px-3 sm:px-4 py-2 sm:py-3 hacker-input rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-300 text-sm sm:text-base" placeholder="Enter your email">
+                            <input type="email" required class="w-full px-4 py-3 hacker-input rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-300" placeholder="Enter your email">
                         </div>
                         
                         <div>
-                            <label class="block text-xs sm:text-sm font-medium text-green-400 mb-1 sm:mb-2 terminal-text">
-                                <i class="fas fa-lock mr-1 sm:mr-2 text-green-400"></i>PASSWORD
+                            <label class="block text-sm font-medium text-green-400 mb-2 terminal-text">
+                                <i class="fas fa-lock mr-2 text-green-400"></i>PASSWORD
                             </label>
                             <div class="relative">
-                                <input type="password" required class="w-full px-3 sm:px-4 py-2 sm:py-3 hacker-input rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-300 pr-10 sm:pr-12 text-sm sm:text-base" placeholder="Enter your password">
-                                <button type="button" class="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 text-green-400 hover:text-green-300 text-sm" title="Toggle password visibility">
+                                <input type="password" required class="w-full px-4 py-3 hacker-input rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-300 pr-12" placeholder="Enter your password">
+                                <button type="button" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-green-400 hover:text-green-300" title="Toggle password visibility">
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </div>
                         </div>
 
-                        <div class="flex items-center justify-between text-xs sm:text-sm">
+                        <div class="flex items-center justify-between">
                             <label class="flex items-center">
                                 <input type="checkbox" class="rounded border-green-400 text-green-400 focus:ring-green-400 bg-black">
-                                <span class="ml-2 text-green-400 terminal-text">Remember session</span>
+                                <span class="ml-2 text-sm text-green-400 terminal-text">Remember session</span>
                             </label>
-                            <a href="#" class="text-green-400 hover:text-green-300 transition-colors terminal-text">Reset password</a>
+                            <a href="#" class="text-sm text-green-400 hover:text-green-300 transition-colors terminal-text">Reset password</a>
                         </div>
 
-                        <button type="submit" class="w-full hacker-btn py-2 sm:py-3 px-4 rounded-lg font-medium transform hover:scale-105 transition-all duration-300 shadow-lg text-sm sm:text-base">
-                            <i class="fas fa-terminal mr-1 sm:mr-2"></i>EXECUTE_LOGIN
+                        <button type="submit" class="w-full hacker-btn py-3 px-4 rounded-lg font-medium transform hover:scale-105 transition-all duration-300 shadow-lg">
+                            <i class="fas fa-terminal mr-2"></i>EXECUTE_LOGIN
                         </button>
 
                         <div class="text-center">
-                            <span class="text-xs sm:text-sm text-green-400 terminal-text">Or authenticate via</span>
+                            <span class="text-sm text-green-400 terminal-text">Or authenticate via</span>
                         </div>
 
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
-                            <button type="button" class="flex items-center justify-center px-3 sm:px-4 py-1 sm:py-2 social-btn rounded-lg transition-colors">
-                                <i class="fab fa-google text-red-400 mr-1 sm:mr-2"></i>
-                                <span class="text-xs sm:text-sm terminal-text">Google</span>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button type="button" class="flex items-center justify-center px-4 py-2 social-btn rounded-lg transition-colors">
+                                <i class="fab fa-google text-red-400 mr-2"></i>
+                                <span class="text-sm terminal-text">Google</span>
                             </button>
-                            <button type="button" class="flex items-center justify-center px-3 sm:px-4 py-1 sm:py-2 social-btn rounded-lg transition-colors">
-                                <i class="fab fa-facebook text-blue-400 mr-1 sm:mr-2"></i>
-                                <span class="text-xs sm:text-sm terminal-text">Facebook</span>
+                            <button type="button" class="flex items-center justify-center px-4 py-2 social-btn rounded-lg transition-colors">
+                                <i class="fab fa-facebook text-blue-400 mr-2"></i>
+                                <span class="text-sm terminal-text">Facebook</span>
                             </button>
                         </div>
                     </div>
@@ -405,78 +379,78 @@
 
                 <!-- Signup Form -->
                 <form id="signupForm" class="form-container hidden">
-                    <div class="space-y-4 md:space-y-6">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs sm:text-sm font-medium text-green-400 mb-1 sm:mb-2 terminal-text">
-                                    <i class="fas fa-user mr-1 sm:mr-2 text-green-400"></i>FIRST_NAME
+                                <label class="block text-sm font-medium text-green-400 mb-2 terminal-text">
+                                    <i class="fas fa-user mr-2 text-green-400"></i>FIRST_NAME
                                 </label>
-                                <input type="text" required class="w-full px-3 sm:px-4 py-2 sm:py-3 hacker-input rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-300 text-sm sm:text-base" placeholder="Mohammad">
+                                <input type="text" required class="w-full px-4 py-3 hacker-input rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-300" placeholder="Mohammad">
                             </div>
                             <div>
-                                <label class="block text-xs sm:text-sm font-medium text-green-400 mb-1 sm:mb-2 terminal-text">
-                                    <i class="fas fa-user mr-1 sm:mr-2 text-green-400"></i>LAST_NAME
+                                <label class="block text-sm font-medium text-green-400 mb-2 terminal-text">
+                                    <i class="fas fa-user mr-2 text-green-400"></i>LAST_NAME
                                 </label>
-                                <input type="text" required class="w-full px-3 sm:px-4 py-2 sm:py-3 hacker-input rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-300 text-sm sm:text-base" placeholder="Abdullah">
+                                <input type="text" required class="w-full px-4 py-3 hacker-input rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-300" placeholder="Abdullah">
                             </div>
                         </div>
 
                         <div>
-                            <label class="block text-xs sm:text-sm font-medium text-green-400 mb-1 sm:mb-2 terminal-text">
-                                <i class="fas fa-envelope mr-1 sm:mr-2 text-green-400"></i>EMAIL_ADDRESS
+                            <label class="block text-sm font-medium text-green-400 mb-2 terminal-text">
+                                <i class="fas fa-envelope mr-2 text-green-400"></i>EMAIL_ADDRESS
                             </label>
-                            <input type="email" required class="w-full px-3 sm:px-4 py-2 sm:py-3 hacker-input rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-300 text-sm sm:text-base" placeholder="Enter your email">
+                            <input type="email" required class="w-full px-4 py-3 hacker-input rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-300" placeholder="Enter your email">
                         </div>
                         
                         <div>
-                            <label class="block text-xs sm:text-sm font-medium text-green-400 mb-1 sm:mb-2 terminal-text">
-                                <i class="fas fa-lock mr-1 sm:mr-2 text-green-400"></i>PASSWORD
+                            <label class="block text-sm font-medium text-green-400 mb-2 terminal-text">
+                                <i class="fas fa-lock mr-2 text-green-400"></i>PASSWORD
                             </label>
                             <div class="relative">
-                                <input type="password" required class="w-full px-3 sm:px-4 py-2 sm:py-3 hacker-input rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-300 pr-10 sm:pr-12 text-sm sm:text-base" placeholder="Create a password">
-                                <button type="button" class="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 text-green-400 hover:text-green-300 text-sm" title="Toggle password visibility">
+                                <input type="password" required class="w-full px-4 py-3 hacker-input rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-300 pr-12" placeholder="Create a password">
+                                <button type="button" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-green-400 hover:text-green-300" title="Toggle password visibility">
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </div>
                         </div>
 
                         <div>
-                            <label class="block text-xs sm:text-sm font-medium text-green-400 mb-1 sm:mb-2 terminal-text">
-                                <i class="fas fa-lock mr-1 sm:mr-2 text-green-400"></i>CONFIRM_PASSWORD
+                            <label class="block text-sm font-medium text-green-400 mb-2 terminal-text">
+                                <i class="fas fa-lock mr-2 text-green-400"></i>CONFIRM_PASSWORD
                             </label>
                             <div class="relative">
-                                <input type="password" required class="w-full px-3 sm:px-4 py-2 sm:py-3 hacker-input rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-300 pr-10 sm:pr-12 text-sm sm:text-base" placeholder="Confirm your password">
-                                <button type="button" class="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 text-green-400 hover:text-green-300 text-sm" title="Toggle password visibility">
+                                <input type="password" required class="w-full px-4 py-3 hacker-input rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-300 pr-12" placeholder="Confirm your password">
+                                <button type="button" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-green-400 hover:text-green-300" title="Toggle password visibility">
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </div>
                         </div>
 
-                        <div class="flex items-center text-xs sm:text-sm">
+                        <div class="flex items-center">
                             <label class="flex items-center">
                                 <input type="checkbox" required class="rounded border-green-400 text-green-400 focus:ring-green-400 bg-black">
-                                <span class="ml-2 text-green-400 terminal-text">
-                                    I agree to the <a href="#" class="text-green-400 hover:text-green-300">Terms</a> and <a href="#" class="text-green-400 hover:text-green-300">Privacy</a>
+                                <span class="ml-2 text-sm text-green-400 terminal-text">
+                                    I agree to the <a href="#" class="text-green-400 hover:text-green-300">Terms of Service</a> and <a href="#" class="text-green-400 hover:text-green-300">Privacy Policy</a>
                                 </span>
                             </label>
                         </div>
 
-                        <button type="submit" class="w-full hacker-btn py-2 sm:py-3 px-4 rounded-lg font-medium transform hover:scale-105 transition-all duration-300 shadow-lg text-sm sm:text-base">
-                            <i class="fas fa-user-plus mr-1 sm:mr-2"></i>CREATE_ACCOUNT
+                        <button type="submit" class="w-full hacker-btn py-3 px-4 rounded-lg font-medium transform hover:scale-105 transition-all duration-300 shadow-lg">
+                            <i class="fas fa-user-plus mr-2"></i>CREATE_ACCOUNT
                         </button>
 
                         <div class="text-center">
-                            <span class="text-xs sm:text-sm text-green-400 terminal-text">Or register via</span>
+                            <span class="text-sm text-green-400 terminal-text">Or register via</span>
                         </div>
 
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
-                            <button type="button" class="flex items-center justify-center px-3 sm:px-4 py-1 sm:py-2 social-btn rounded-lg transition-colors">
-                                <i class="fab fa-google text-red-400 mr-1 sm:mr-2"></i>
-                                <span class="text-xs sm:text-sm terminal-text">Google</span>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button type="button" class="flex items-center justify-center px-4 py-2 social-btn rounded-lg transition-colors">
+                                <i class="fab fa-google text-red-400 mr-2"></i>
+                                <span class="text-sm terminal-text">Google</span>
                             </button>
-                            <button type="button" class="flex items-center justify-center px-3 sm:px-4 py-1 sm:py-2 social-btn rounded-lg transition-colors">
-                                <i class="fab fa-facebook text-blue-400 mr-1 sm:mr-2"></i>
-                                <span class="text-xs sm:text-sm terminal-text">Facebook</span>
+                            <button type="button" class="flex items-center justify-center px-4 py-2 social-btn rounded-lg transition-colors">
+                                <i class="fab fa-facebook text-blue-400 mr-2"></i>
+                                <span class="text-sm terminal-text">Facebook</span>
                             </button>
                         </div>
                     </div>
@@ -485,8 +459,8 @@
         </div>
 
         <!-- Footer -->
-        <div class="text-center mt-4 sm:mt-6 md:mt-8">
-            <p class="text-green-400 text-xs sm:text-sm terminal-text">
+        <div class="text-center mt-8">
+            <p class="text-green-400 text-sm terminal-text">
                 © 2024 CYBER_SYSTEMS. All rights reserved.
             </p>
         </div>
@@ -498,9 +472,6 @@
             const matrixRain = document.getElementById('matrixRain');
             const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
             const columns = Math.floor(window.innerWidth / 20);
-            
-            // Clear existing characters
-            matrixRain.innerHTML = '';
             
             for (let i = 0; i < columns; i++) {
                 const char = document.createElement('div');
@@ -615,13 +586,7 @@
         });
 
         // Handle window resize for matrix rain
-        let resizeTimer;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => {
-                createMatrixRain();
-            }, 200);
-        });
+        window.addEventListener('resize', createMatrixRain);
     </script>
 </body>
 </html>
