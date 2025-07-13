@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Signup - Modern UI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Rajdhani', sans-serif;
+        }
+        
+        .hacker-bg {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hacker-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(0, 255, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 0, 255, 0.05) 0%, transparent 50%);
+            animation: matrix-bg 20s ease-in-out infinite;
+        }
+        
+        @keyframes matrix-bg {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+        
+        .matrix-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .matrix-char {
+            position: absolute;
+            color: #00ff00;
+            font-family: 'Orbitron', monospace;
+            font-size: 14px;
+            opacity: 0.7;
+            animation: matrix-fall 3s linear infinite;
+        }
+        
+        @keyframes matrix-fall {
+            0% {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+        
+        .hacker-container {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ff00;
+            box-shadow: 
+                0 0 20px rgba(0, 255, 0, 0.3),
+                inset 0 0 20px rgba(0, 255, 0, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .hacker-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #00ff00, #00ffff, #ff00ff, #00ff00);
+            z-index: -1;
+            animation: border-glow 3s ease-in-out infinite;
+        }
+        
+        @keyframes border-glow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .hacker-header {
+            background: linear-gradient(135deg, #00ff00, #00ffff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+        
+        .hacker-toggle {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #00ff00;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        
+        .hacker-toggle.active {
+            background: linear-gradient(135deg, #00ff00, #00ffff);
+            color: #000;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+        }
+        
+        .hacker-input {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            transition: all 0.3s ease;
+        }
+        
+        .hacker-input:focus {
+            border-color: #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+            background: rgba(0, 0, 0, 0.8);
+        }
+        
+        .hacker-input::placeholder {
+            color: rgba(0, 255, 0, 0.5);
+        }
+        
+        .hacker-btn {
+            background: linear-gradient(135deg, #00ff00, #00ffff);
+            color: #000;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hacker-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .hacker-btn:hover::before {
+            left: 100%;
+        }
+        
+        .hacker-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 255, 0, 0.4);
+        }
+        
+        .social-btn {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            transition: all 0.3s ease;
+        }
+        
+        .social-btn:hover {
+            background: rgba(0, 255, 0, 0.1);
+            border-color: #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+        
+        .form-container {
+            transition: all 0.6s ease-in-out;
+        }
+        
+        .slide-in {
+            animation: slideIn 0.6s ease-in-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .glitch {
+            animation: glitch 2s infinite;
+        }
+        
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+        
+        .terminal-text {
+            font-family: 'Orbitron', monospace;
+            color: #00ff00;
+        }
+        
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff00, transparent);
+            animation: scan 3s linear infinite;
+        }
+        
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+            .hacker-container {
+                border-width: 1px;
+                box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+            }
+            
+            .hacker-toggle {
+                flex-direction: column;
+                gap: 4px;
+                padding: 4px;
+            }
+            
+            .hacker-toggle button {
+                width: 100%;
+                padding: 8px;
+            }
+            
+            .grid-cols-2 {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .hacker-header {
+                font-size: 1.5rem;
+            }
+            
+            .hacker-input {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+            
+            .hacker-btn {
+                padding: 12px;
+                font-size: 14px;
+            }
+            
+            .social-btn {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .terminal-text {
+                font-size: 14px;
+            }
+            
+            .matrix-char {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .hacker-header {
+                font-size: 1.3rem;
+            }
+            
+            .hacker-toggle button {
+                font-size: 12px;
+            }
+            
+            .hacker-input {
+                padding: 8px 10px;
+            }
+            
+            .hacker-btn {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body class="hacker-bg min-h-screen flex items-center justify-center p-4 relative">
+    <!-- Matrix Rain Effect -->
+    <div class="matrix-rain" id="matrixRain"></div>
+    
+    <!-- Scan Line Effect -->
+    <div class="scan-line"></div>
+    
+    <div class="w-full max-w-md min-h-[500px] md:min-h-[600px] relative z-10 mx-2">
+        <!-- Main Container -->
+        <div class="hacker-container rounded-xl md:rounded-2xl overflow-hidden">
+            <!-- Header with Toggle -->
+            <div class="bg-gradient-to-r from-black to-gray-900 p-6 md:p-8 text-center relative">
+                <div class="scan-line"></div>
+                <h1 class="text-2xl md:text-3xl font-bold hacker-header mb-2 terminal-text" id="title">SYSTEM_ACCESS</h1>
+                <p class="text-green-400 terminal-text text-sm md:text-base" id="subtitle">> Enter credentials to proceed...</p>
+                
+                <!-- Toggle Buttons -->
+                <div class="mt-4 md:mt-6 hacker-toggle rounded-full p-1 flex flex-col sm:flex-row">
+                    <button id="loginToggle" class="flex-1 py-2 px-4 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 hacker-toggle active">
+                        <i class="fas fa-terminal mr-1 sm:mr-2"></i>LOGIN
+                    </button>
+                    <button id="signupToggle" class="flex-1 py-2 px-4 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 hacker-toggle">
+                        <i class="fas fa-user-plus mr-1 sm:mr-2"></i>REGISTER
+                    </button>
+                </div>
+            </div>
+
+            <!-- Form Container -->
+            <div class="p-4 sm:p-6 md:p-8 bg-black/50">
+                <!-- Login Form -->
+                <form id="loginForm" class="form-container slide-in">
+                    <div class="space-y-4 md:space-y-6">
+                        <div>
+                            <label class="block text-xs sm:text-sm font-medium text-green-400 mb-1 sm:mb-2 terminal-text">
+                                <i class="fas fa-envelope mr-1 sm:mr-2 text-green-400"></i>EMAIL_ADDRESS
+                            </label>
+                            <input type="email" required class="w-full px-3 sm:px-4 py-2 sm:py-3 hacker-input rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-300 text-sm sm:text-base" placeholder="Enter your email">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-xs sm:text-sm font-medium text-green-400 mb-1 sm:mb-2 terminal-text">
+                                <i class="fas fa-lock mr-1 sm:mr-2 text-green-400"></i>PASSWORD
+                            </label>
+                            <div class="relative">
+                                <input type="password" required class="w-full px-3 sm:px-4 py-2 sm:py-3 hacker-input rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-300 pr-10 sm:pr-12 text-sm sm:text-base" placeholder="Enter your password">
+                                <button type="button" class="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 text-green-400 hover:text-green-300 text-sm" title="Toggle password visibility">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between text-xs sm:text-sm">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-green-400 text-green-400 focus:ring-green-400 bg-black">
+                                <span class="ml-2 text-green-400 terminal-text">Remember session</span>
+                            </label>
+                            <a href="#" class="text-green-400 hover:text-green-300 transition-colors terminal-text">Reset password</a>
+                        </div>
+
+                        <button type="submit" class="w-full hacker-btn py-2 sm:py-3 px-4 rounded-lg font-medium transform hover:scale-105 transition-all duration-300 shadow-lg text-sm sm:text-base">
+                            <i class="fas fa-terminal mr-1 sm:mr-2"></i>EXECUTE_LOGIN
+                        </button>
+
+                        <div class="text-center">
+                            <span class="text-xs sm:text-sm text-green-400 terminal-text">Or authenticate via</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                            <button type="button" class="flex items-center justify-center px-3 sm:px-4 py-1 sm:py-2 social-btn rounded-lg transition-colors">
+                                <i class="fab fa-google text-red-400 mr-1 sm:mr-2"></i>
+                                <span class="text-xs sm:text-sm terminal-text">Google</span>
+                            </button>
+                            <button type="button" class="flex items-center justify-center px-3 sm:px-4 py-1 sm:py-2 social-btn rounded-lg transition-colors">
+                                <i class="fab fa-facebook text-blue-400 mr-1 sm:mr-2"></i>
+                                <span class="text-xs sm:text-sm terminal-text">Facebook</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Signup Form -->
+                <form id="signupForm" class="form-container hidden">
+                    <div class="space-y-4 md:space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                            <div>
+                                <label class="block text-xs sm:text-sm font-medium text-green-400 mb-1 sm:mb-2 terminal-text">
+                                    <i class="fas fa-user mr-1 sm:mr-2 text-green-400"></i>FIRST_NAME
+                                </label>
+                                <input type="text" required class="w-full px-3 sm:px-4 py-2 sm:py-3 hacker-input rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-300 text-sm sm:text-base" placeholder="Mohammad">
+                            </div>
+                            <div>
+                                <label class="block text-xs sm:text-sm font-medium text-green-400 mb-1 sm:mb-2 terminal-text">
+                                    <i class="fas fa-user mr-1 sm:mr-2 text-green-400"></i>LAST_NAME
+                                </label>
+                                <input type="text" required class="w-full px-3 sm:px-4 py-2 sm:py-3 hacker-input rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-300 text-sm sm:text-base" placeholder="Abdullah">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs sm:text-sm font-medium text-green-400 mb-1 sm:mb-2 terminal-text">
+                                <i class="fas fa-envelope mr-1 sm:mr-2 text-green-400"></i>EMAIL_ADDRESS
+                            </label>
+                            <input type="email" required class="w-full px-3 sm:px-4 py-2 sm:py-3 hacker-input rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-300 text-sm sm:text-base" placeholder="Enter your email">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-xs sm:text-sm font-medium text-green-400 mb-1 sm:mb-2 terminal-text">
+                                <i class="fas fa-lock mr-1 sm:mr-2 text-green-400"></i>PASSWORD
+                            </label>
+                            <div class="relative">
+                                <input type="password" required class="w-full px-3 sm:px-4 py-2 sm:py-3 hacker-input rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-300 pr-10 sm:pr-12 text-sm sm:text-base" placeholder="Create a password">
+                                <button type="button" class="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 text-green-400 hover:text-green-300 text-sm" title="Toggle password visibility">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs sm:text-sm font-medium text-green-400 mb-1 sm:mb-2 terminal-text">
+                                <i class="fas fa-lock mr-1 sm:mr-2 text-green-400"></i>CONFIRM_PASSWORD
+                            </label>
+                            <div class="relative">
+                                <input type="password" required class="w-full px-3 sm:px-4 py-2 sm:py-3 hacker-input rounded-lg focus:ring-2 focus:ring-green-400 focus:border-transparent transition-all duration-300 pr-10 sm:pr-12 text-sm sm:text-base" placeholder="Confirm your password">
+                                <button type="button" class="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 text-green-400 hover:text-green-300 text-sm" title="Toggle password visibility">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center text-xs sm:text-sm">
+                            <label class="flex items-center">
+                                <input type="checkbox" required class="rounded border-green-400 text-green-400 focus:ring-green-400 bg-black">
+                                <span class="ml-2 text-green-400 terminal-text">
+                                    I agree to the <a href="#" class="text-green-400 hover:text-green-300">Terms</a> and <a href="#" class="text-green-400 hover:text-green-300">Privacy</a>
+                                </span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="w-full hacker-btn py-2 sm:py-3 px-4 rounded-lg font-medium transform hover:scale-105 transition-all duration-300 shadow-lg text-sm sm:text-base">
+                            <i class="fas fa-user-plus mr-1 sm:mr-2"></i>CREATE_ACCOUNT
+                        </button>
+
+                        <div class="text-center">
+                            <span class="text-xs sm:text-sm text-green-400 terminal-text">Or register via</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                            <button type="button" class="flex items-center justify-center px-3 sm:px-4 py-1 sm:py-2 social-btn rounded-lg transition-colors">
+                                <i class="fab fa-google text-red-400 mr-1 sm:mr-2"></i>
+                                <span class="text-xs sm:text-sm terminal-text">Google</span>
+                            </button>
+                            <button type="button" class="flex items-center justify-center px-3 sm:px-4 py-1 sm:py-2 social-btn rounded-lg transition-colors">
+                                <i class="fab fa-facebook text-blue-400 mr-1 sm:mr-2"></i>
+                                <span class="text-xs sm:text-sm terminal-text">Facebook</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-4 sm:mt-6 md:mt-8">
+            <p class="text-green-400 text-xs sm:text-sm terminal-text">
+                © 2024 CYBER_SYSTEMS. All rights reserved.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Matrix Rain Effect
+        function createMatrixRain() {
+            const matrixRain = document.getElementById('matrixRain');
+            const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+            const columns = Math.floor(window.innerWidth / 20);
+            
+            // Clear existing characters
+            matrixRain.innerHTML = '';
+            
+            for (let i = 0; i < columns; i++) {
+                const char = document.createElement('div');
+                char.className = 'matrix-char';
+                char.textContent = chars[Math.floor(Math.random() * chars.length)];
+                char.style.left = i * 20 + 'px';
+                char.style.animationDelay = Math.random() * 3 + 's';
+                char.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                matrixRain.appendChild(char);
+            }
+        }
+
+        // Toggle between login and signup forms
+        const loginToggle = document.getElementById('loginToggle');
+        const signupToggle = document.getElementById('signupToggle');
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+        const title = document.getElementById('title');
+        const subtitle = document.getElementById('subtitle');
+
+        function showLogin() {
+            loginForm.classList.remove('hidden');
+            signupForm.classList.add('hidden');
+            loginToggle.classList.add('active');
+            signupToggle.classList.remove('active');
+            title.textContent = 'SYSTEM_ACCESS';
+            subtitle.textContent = '> Enter credentials to proceed...';
+            
+            // Add animation
+            loginForm.classList.add('slide-in');
+            setTimeout(() => loginForm.classList.remove('slide-in'), 600);
+        }
+
+        function showSignup() {
+            signupForm.classList.remove('hidden');
+            loginForm.classList.add('hidden');
+            signupToggle.classList.add('active');
+            loginToggle.classList.remove('active');
+            title.textContent = 'USER_REGISTRATION';
+            subtitle.textContent = '> Create new user account...';
+            
+            // Add animation
+            signupForm.classList.add('slide-in');
+            setTimeout(() => signupForm.classList.remove('slide-in'), 600);
+        }
+
+        loginToggle.addEventListener('click', showLogin);
+        signupToggle.addEventListener('click', showSignup);
+
+        // Password visibility toggle
+        document.querySelectorAll('input[type="password"]').forEach(input => {
+            const toggleBtn = input.nextElementSibling;
+            toggleBtn.addEventListener('click', () => {
+                const icon = toggleBtn.querySelector('i');
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            });
+        });
+
+        // Form submission handling with hacker-style messages
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            console.log('Login form submitted');
+            
+            // Simulate loading
+            const submitBtn = loginForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>PROCESSING...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                alert('ACCESS GRANTED! Welcome to the system, hacker.');
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        });
+
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            console.log('Signup form submitted');
+            
+            // Simulate loading
+            const submitBtn = signupForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>CREATING_ACCOUNT...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                alert('ACCOUNT CREATED SUCCESSFULLY! You are now part of the network.');
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        });
+
+        // Add fade-in animation on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.max-w-md').classList.add('fade-in');
+            createMatrixRain();
+            
+            // Add glitch effect to title
+            setInterval(() => {
+                title.classList.add('glitch');
+                setTimeout(() => title.classList.remove('glitch'), 200);
+            }, 5000);
+        });
+
+        // Handle window resize for matrix rain
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                createMatrixRain();
+            }, 200);
+        });
+    </script>
+</body>
+</html>
